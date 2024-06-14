@@ -1,0 +1,167 @@
+<!--@layout(/layout/basic/main.html)-->
+<!--@css(/nd/css/timer.css)-->
+<!--@js(/nd/js/timer.js)-->
+<!--@css(/dim_viral_popup.css)-->
+<!--------------------------------------------------------------------------------------------------------------
+
+※ 아래 "반복시작 ~ 반복끝" 소스 구조를 복사하여 배너의 개수를 늘릴 수 있습니다.
+
+---------------------------------------------------------------------------------------------------------------->
+<!--@js(/nd/js/timer.js)-->
+<style type="text/css"></style>
+<div id="daysTimer" class="daysTimer">
+    <div id="timeWrap" class="timer-wrap">
+         <div class="timerText">
+                    <p id="title">사전예약 남은 시간</p>
+                 <p id="clock" class="clock"></p>
+                 <button type="button" class="alramBtn tabBtn" onclick="location.href='https://app.smartsheet.com/b/form/91976bb53be4410e950ec1ba97c2f891'">예약 알림 받기</button> 
+                 <button type="button" class="snsViral tabBtn">공유하기</button> 
+        </div>
+    </div>
+    <a id="timerCloser" class="timerCloser">알림창 닫기</a>
+ </div>
+
+<div id="viral_container">
+ <div id="viral_wrap">
+     <div id="share_container" class="shareBox">
+             <h2>THE CLUR 공유하기</h2>
+                 <h3>더클러의 소식을 공유해보세요.</h3>
+                 <div id="snsShare" class="snsBtn-wrap">
+                     <button id="share ka" class="shareBtn ka" onclick="location.href='https://app.smartsheet.com/b/form/91976bb53be4410e950ec1ba97c2f891'">카카오 공유하기</button>
+                     <button id="share me" class="shareBtn me" onclick="location.href='https://app.smartsheet.com/b/form/91976bb53be4410e950ec1ba97c2f891'">SMS 공유하기</button>    
+                 </div>
+                 <button id="linkBtn" class="copyLink">
+                     눌러서 url 복사하기
+                 </button>	
+     </div>
+     <a id="shareCloser" class="shareCloser">닫기</a>
+ </div>
+</div>
+
+
+
+<script>
+    /* 서버시간 불러오기*/
+
+const remainTime = document.querySelector("#clock");
+
+function diffDay() {
+    const masTime = new Date("2023-11-26"); /*D-DAY 설정*/
+    const todayTime = new Date();
+    
+    const diff = masTime - todayTime;
+
+    const diffDay = String(Math.floor(diff / (1000*60*60*24)));
+    const diffHour =String( Math.floor((diff / (1000*60*60)) % 24)).padStart(2,"0");
+    const diffMin = String(Math.floor((diff / (1000*60)) % 60)).padStart(2,"0");
+    const diffSec = String(Math.floor(diff / 1000 % 60)).padStart(2,"0");
+    
+    remainTime.innerText = `${diffDay}일 ${diffHour}시간 ${diffMin}분 ${diffSec}초`;
+    
+    if(diff < 0){
+          remainTime.innerText = `예약이 마감되었습니다.`;
+    }
+}
+
+diffDay();
+setInterval(diffDay, 1000);
+    
+/*toggle*/
+var hiddenTimer = document.getElementById('timerCloser');
+var timerArea = document.getElementById('timeWrap');
+var hideShare = document.getElementById('shareCloser');
+var shareArea = document.getElementById('viral_container');
+var ViralCursor = document.querySelector('.snsViral');
+
+$(document).ready(function(){
+    
+    
+  /*타이머 바 닫기 */
+  $(hiddenTimer).click(function(){
+     $('body').toggleClass('alert_close');
+
+    if($(this).html()==='알림창 닫기'){
+      $(this).html('알림창 열기');
+    }
+    else{
+      $(this).html('알림창 닫기');
+    };
+
+  });
+
+    
+ /*공유하기 팝업 창 열기 */
+
+  $(ViralCursor).click(function() {
+    var box = $('.viralBox');
+    
+    // 현재 박스 위치 확인
+    //if(parseInt(box.css('bottom')) < 0) {
+        box.addClass('show'); // 올라가게 위치 설정
+    //};
+});
+    
+  $(hideShare).click(function() {
+    var box = $('.viralBox');
+    
+    // 현재 박스 위치 확인
+    //if(parseInt(box.css('bottom')) > 0) {
+        box.removeClass('show'); // 올라가게 위치 설정
+    //};
+});
+
+	if($('#sms_sharing_btn').length>0){
+		const userAgent = navigator.userAgent.toLocaleLowerCase();
+		var sms_href='sms:' + $('#sms_sharing_btn').find('a').data('number');
+		if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('macintosh') > -1){
+			sms_href+= '&body=';
+		} else { // userAgent.indexOf('android') > -1
+			sms_href+= '?body=';
+		}
+		sms_href+= $('#sms_sharing_btn').find('a').data('text');
+		$('#sms_sharing_btn').find('a').attr('href',sms_href);
+
+		$('#sms_sharing_btn').click(function(){
+			$('#sms_sharing_btn').find('a').click();
+		});
+	}
+    
+     $.ajax({
+    type: 'GET',
+    url: 'https://lifezip.co.kr:8443/soundpanda/API?tcode=alramText',
+    dataType: 'json',
+    success: function(data){
+
+        if($.isArray(data)){
+            // 숫자를 추가할 버튼 선택
+            var button = document.querySelector('.alramBtn');
+            var link = document.getElementById('alramLink'); // 링크 요소 선택
+            var number = data.length;
+            link.textContent = link.textContent+" "+number; // 링크의 텍스트 변경
+        }else{
+            console.log('에러입니다.');
+        }
+    },
+    error: function(error){
+        console.log('메세지조회불가');
+    }
+});
+    
+});
+
+
+function url_clip(){
+	var url = '';
+	var textarea = document.createElement("textarea");
+	document.body.appendChild(textarea);
+	url = window.document.location.href;
+	textarea.value = url;
+	textarea.select();
+	document.execCommand("copy");
+	document.body.removeChild(textarea);
+	alert("URL이 복사되었습니다.")
+}
+
+
+</script>
+  
