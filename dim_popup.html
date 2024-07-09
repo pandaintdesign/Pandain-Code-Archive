@@ -1,10 +1,16 @@
-<style type="text/css">
-	#dim_popup { position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999; display:none; }
+<style>
+    @import url('//use.fontawesome.com/releases/v5.1.0/css/all.css');
+	#dim_popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9900; display:none; }
 	#dim_popup.open { display:block; }
-    #dim_popup #dim_popup_cont { position:fixed; width:374px; top:50%; left:50%; -webkit-transform:translate(-50%, -50%); -ms-transform:translate(-50%, -50%); transform:translate(-50%, -50%); }
-    #dim_popup #dim_popup_cont .cont_box { display:block; background:#fff; border-radius:20px; overflow:hidden; }
-    #dim_popup #dim_popup_cont .img_box { display:block; }
-    #dim_popup #dim_popup_cont .img_box img { width:100%; }
+    #dim_popup #dim_popup_cont { position:fixed; width:375px; top:50%; left:50%; -webkit-transform:translate(-50%, -50%); -ms-transform:translate(-50%, -50%); transform:translate(-50%, -50%); }
+    #dim_popup #dim_popup_cont .cont_box { display:block; border-radius:20px; overflow:hidden; height: auto;}
+    #dim_popup #dim_popup_cont .btn_close { position:absolute; right:15px; top:15px; z-index:10; cursor:pointer; }
+    #dim_popup #dim_popup_cont .btn_close i { font-size:20px; }
+    #dim_popup #dim_popup_cont .img_box{ display:block; }
+    #dim_popup #dim_popup_cont .img_box .popupslide{width:100%;}
+    #dim_popup #dim_popup_cont .img_box .swiper{margin:0;}
+    #dim_popup #dim_popup_cont .img_box .popupslide .swiper-wrapper .swiper-slide{width:100%}
+    #dim_popup #dim_popup_cont .img_box img {width:375px;}
     #dim_popup #dim_popup_cont .txt_box { display:block; padding:25px 15px; text-align:center; line-height:1.5; }
     #dim_popup #dim_popup_cont .txt_box h2 { font-size:20px; color:#02C6C5; font-weight: 600;}
     #dim_popup #dim_popup_cont .txt_box h4 { font-size:16px; color:#000; }
@@ -14,59 +20,46 @@
     #dim_popup #dim_popup_cont .btn_box a { display:block; line-height:52px; text-align:center; border-radius:52px; font-size:13px; cursor:pointer; }
     #dim_popup #dim_popup_cont .btn_box a.black { background:#000; color:#fff; }
     #dim_popup #dim_popup_cont .btn_box a.gray { background:#ececec; color:#000; margin-top:15px; }
-    #dim_popup #dim_popup_cont #dim_popup_today { position:absolute; bottom:-40px; left:0; line-height:40px; color:#ccc; font-size:12px; cursor:pointer; }
+    #dim_popup .todayCloser {/* position:absolute; bottom:24%; left:40%;*/ text-align:center; line-height:40px; color:#ccc; font-size:12px; cursor:pointer; display: block;}
+    /*모바일*/
+    @media all and (max-width: 1024px){
+    		 #dim_popup #dim_popup_cont { position:fixed; width:80%;height: 50%;top:50%; left:50%; -webkit-transform:translate(-50%, -50%); -ms-transform:translate(-50%, -50%); transform:translate(-50%, -50%); }
+         	#dim_popup #dim_popup_cont .cont_box { display:block;  border-radius:20px; overflow:hidden; height: 83%;}
+         	 #dim_popup #dim_popup_cont .img_box img {width:100%;}
+        	#dim_popup  .todayCloser { position:absolute; bottom:28%; left:10%; line-height:40px; color:#ccc; font-size:12px; cursor:pointer;display: block;}
+    }
 </style>
+<!--@js(/dim_popup.js)-->
 <div id="dim_popup">
 	<div id="dim_popup_cont">
         <div class="cont_box">
-            <div class="img_box"><img src="/TheClur/popup/wadiz.jpg" onerror="this.style.display='none';"></div>
-            <div class="txt_box">
-                <h2>와디즈 펀딩+ 이벤트!</h2>
-                <h4>자세한 내용은 펀딩+ 홈페이지를</br> 참고해주세요!</b></h4>
+        	<div class="btn_close"><i class="fa-solid fa-xmark"></i></div>
+            <div class="img_box">
+                <div class="swiper popupSlide">
+                    <div class="swiper-wrapper">
+                        <!--<div class="swiper-slide">
+                            <img src="/TheClur/popup/notice.jpg" onerror="this.style.display='none';">
+                         </div>-->
+                        <div class="swiper-slide">
+                            <a href="https://litt.ly/theclur_cx" target="_blank"><img src="/TheClur/popup/Inquiry.jpg" onerror="this.style.display='none';"></a>
+                         </div>
+                        <div class="swiper-slide">
+                            <a href="/product/list.html?cate_no=122" target="_blank"><img src="/TheClur/popup/custom_cover.jpg" onerror="this.style.display='none';"></a>
+                         </div>
+                        
+                    </div>
+                  </div>
+          	</div>	
+        </div>
+        <a id="dim_popup_today" class="todayCloser">오늘 보지않기</a>
+    </div>
+            <!--<div class="txt_box">
+                <h2>와디즈 알림신청 이벤트!</h2>
+                <h4>자세한 내용은 사전예약 홈페이지를</br> 참고해주세요!</b></h4>
                 <h3>많은 관심과 사랑 부탁드립니다.</h3>
             </div>
             <div class="btn_box">
-                <a href="https://www.wadiz.kr/web/campaign/detail/232896" class="black">와디즈 펀딩+ 페이지 보러가기</a>
+                <a href="https://www.wadiz.kr/web/wcomingsoon/rwd/232896" class="black">와디즈 사전예약 펀딩페이지 보러가기</a>
                 <a class="gray" id="dim_popup_close">다음에 볼게요.</a>
-            </div>
-        </div>
-        <a id="dim_popup_today">오늘 보지않기</a>
-      
-    </div>
+            </div>-->        
 </div>
-<script utf-8 type="text/javascript">
-    var dim_popup = dim_getCookie('dim_popup')
-    if (dim_popup == "" || dim_popup == null ) {
-        jQuery_bs("#dim_popup").addClass('open');
-    }        
-        
-    jQuery_bs("#dim_popup_close").click(function(){
-        jQuery_bs("#dim_popup").removeClass('open');
-    });
-    jQuery_bs("#dim_popup_today").click(function(){
-		dim_setCookie('dim_popup', '1', 0, '/');
-        jQuery_bs("#dim_popup").removeClass('open');
-    });
-    
-function dim_getCookie( name ){
-	var dc = document.cookie;
-	var prefix = name + "="
-	var begin = dc.indexOf("; " + prefix);
-	if ( begin == -1 ){
-		begin = dc.indexOf(prefix);
-		if (begin != 0) return null;
-	}
-	else begin += 2
-	var end = document.cookie.indexOf(";", begin);
-	if (end == -1) end = dc.length;
-	return unescape(dc.substring(begin + prefix.length, end));
-}
-function dim_setCookie( name, value, expires, path, domain, secure ){
-	var curCookie = name + "=" + escape( value ) +
-		( ( expires ) ? "; expires=" + expires.toGMTString() : "" ) +
-		( ( path ) ? "; path=" + path : "" ) +
-		( ( domain ) ? "; domain=" + domain : "" ) +
-		( ( secure ) ? "; secure" : "" );
-	document.cookie = curCookie;
-}
-</script>
