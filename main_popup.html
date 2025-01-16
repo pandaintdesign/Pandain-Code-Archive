@@ -1,0 +1,187 @@
+<!--@js(/main_popup.js)-->
+<style>
+	#dim_popup { 
+        position:fixed; 
+        top:0; 
+        left:0; 
+        width:100%; 
+        height:100%; 
+        z-index: 9990;
+        background:rgba(0,0,0,0.7); 
+    }
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+     }
+    
+	#dim_popup .open{ 
+        display:block; 
+    }
+
+    #dim_popup .dim_popup_cont{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 380px;
+        max-height: 640px;
+        background: #fff;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #dim_popup .dim_popup_cont .closeMark{
+    	position: absolute;
+        z-index: 9999;
+        right: 0;
+    }
+
+    #dim_popup .dim_popup_cont .closeMark button ion-icon{
+        color: #fff;
+    }
+
+    #dim_popup .dim_popup_cont .popup_wrap{
+        width: 100%;
+        height: 100%;
+    }
+    
+    
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box{
+    	display: block;
+    }
+
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .imgBox{
+        border-radius: 10px 10px 0 0;
+        width: 380px;
+        height: 380px;
+    }
+    
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .imgBox img{
+    	border-radius: 10px 10px 0 0;
+    }
+    
+
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .txtBox{
+        width: 100%;
+        text-align: center;
+        padding: 20px 0px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .txtBox .textArea{
+        margin: 10px 0px;
+    }
+
+    
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .txtBox .textArea h2{
+        padding-bottom: 10px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #ff6d88;
+    }
+
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .txtBox .textArea h4{
+        padding-bottom: 10px;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #777;
+    }
+
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .txtBox .textArea h3{
+        font-size: 18px;
+        font-weight: 700;
+        color: #000;
+    }
+
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .txtBox .urlBtn{
+        background-color: #000;
+        border-radius: 50px;
+        margin: 20px;
+        padding: 15px;
+    }
+
+    #dim_popup .dim_popup_cont .popup_wrap .popup_Box .txtBox .urlBtn a{
+        color: #fff;
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .todayClose{
+        position: absolute;
+        bottom: 12%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+    }
+   
+    .todayClose a{
+        border: none;
+        color: #fff;
+    }
+    /*모바일*/
+    @media all and (max-width: 1024px){
+    		 #dim_popup #dim_popup_cont { position:fixed; width:80%;height: 50%;top:50%; left:50%; -webkit-transform:translate(-50%, -50%); -ms-transform:translate(-50%, -50%); transform:translate(-50%, -50%); }
+         	#dim_popup #dim_popup_cont .cont_box { display:block;  border-radius:20px; overflow:hidden; height: 83%;}
+         	 #dim_popup #dim_popup_cont .img_box img {width:100%;}
+        	#dim_popup  .todayCloser { position:absolute; bottom:28%; left:10%; line-height:40px; color:#ccc; font-size:12px; cursor:pointer;display: block;}
+    }
+</style>
+
+<div id="dim_popup">
+	<div class="dim_popup_cont swiper">
+        <div class="closeMark"><button type="button" class="hidePopup" onclikc="closePopup();"><ion-icon name="close-outline" size="large"></ion-icon></button></div>
+        <div class="popup_wrap swiper-wrapper">
+            <!-- 슬라이드1 -->
+            <div class="popup_Box page swiper-slide">
+                <div class="imgBox"><img src="/TheClur/popup/December_popup.jpg" alt=""></div>
+                <div class="txtBox">
+                    <div class="textArea">
+                        <h2>12월 휴무안내</h2>
+                        <h4>12월 휴무안내 입니다.<br>참고하시어 주문 및 문의사항에 참고하시길 바랍니다. </h4>
+                        <h3>휴무일 : 12월 25일, 2025년 01월 01일</h3>
+                    </div>
+                    <div class="urlBtn">
+                        <a href="">제품 보러가기</a> 
+                    </div>
+                </div>
+            </div>
+            <!-- 슬라이드2 -->
+            <div class="popup_Box page swiper-slide">
+                <div class="imgBox"><img src="/TheClur/popup/theclur_coupang.jpg" alt=""></div>
+                <div class="txtBox">
+                    <div class="textArea">
+                        <h2>휴무일에도 로켓배송!</h2>
+                        <h4>쿠팡 로켓배송을 통해<br>휴무일에도 더클러 X9을 만나보실 수 있습니다.</h4>
+                        <h3>검색창에 더클러 X9을 검색해주세요</h3>
+                    </div>
+                    <div class="urlBtn">
+                        <a href="">제품 보러가기</a> 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>   
+      <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+
+    <div class="todayClose">
+        <a id="dim_popup_today" class="todayBlind">오늘 하루 열지않기</a>
+    </div>    
+</div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+<script>
+
+</script>
+
