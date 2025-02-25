@@ -1,0 +1,53 @@
+<div class="contact" id="contactForm">
+    <div class="writeArea">
+        <form action="post" id="contactArea" class="contactArea">
+            <!-- 이름 -->
+            <div class="form-group" id="companyName">
+                <label for="companyName">
+                    이름 / 기업명
+                    <i class="icon-required"></i>
+                </label>
+                <input type="text" class="form-Box" name="companyName" placeholder id="nameArea">
+            </div>
+            <!-- 제목 -->
+            <div class="form-group" id="title">
+                <label for="titleName">
+                    제목
+                    <i class="icon-required"></i>
+                </label>
+                <input type="text" class="form-Box" name="titleName" placeholder id="titleArea">
+            </div>
+             <!-- 연락처 -->
+             <div class="form-group" id="phone">
+                <label for="titleName">
+                    연락처
+                    <i class="icon-required"></i>
+                </label>
+                <input type="tel" maxlength="4" class="form-Box onlyNumber" name="phone1" placeholder id="phone1">
+                <span class="phoneNumber-line">-</span>
+                <input type="tel" maxlength="4" class="form-Box onlyNumber" name="phone1" placeholder id="phone1">
+                <span class="phoneNumber-line">-</span>
+                <input type="tel" maxlength="4" class="form-Box onlyNumber" name="phone1" placeholder id="phone1">
+            </div>
+            <!-- 이메일 -->
+            <div class="form-group" id="email">
+                <label for="email">
+                    이메일
+                    <i class="icon-required"></i>
+                </label>
+                <input type="text" class="form-Box emailAddress" name="emailAddress" placeholder id="emailAddress">
+            </div>
+             <!-- 내용 -->
+             <div class="form-group" id="contentBox">
+                <label for="contentBox">
+                    내용
+                    <i class="icon-required"></i>
+                </label>
+                <textarea name="contentBox" id="contentBox" class="form-Box contentBox"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="BtnArea">
+        <button id="sendBtn" class="sendContent">보내기</button>
+    </div>
+</div>

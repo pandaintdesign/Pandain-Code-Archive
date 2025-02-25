@@ -1,0 +1,186 @@
+<style>
+  .chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    height: 400px;
+    padding: 10px;
+    margin: 20px auto;
+    position: relative;
+  }
+  #chart2 {
+    display: none;
+  }
+  .bar {
+    width: 100px;
+    height: 100%;
+    margin: 0 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .bar-label {
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+  }
+  .legend {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -150px;
+    font-size: 14px;
+  }
+  .legend div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .legend span.base {
+    background-color: #72c4ff;
+  }
+  .legend span.personal {
+    background-color: #bc7eff;
+  }
+  .legend span.team {
+    background-color: #ffd900;
+  }
+  .legend span.company {
+    background-color: #91ff37;
+  }
+  .legend span {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+  .segment {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .segment span {
+    display: none;
+  }
+  .segment.base {
+    background-color: #72c4ff;
+  }
+  .segment.personal {
+    background-color: #bc7eff;
+  }
+  .segment.team {
+    background-color: #ffd900;
+  }
+  .segment.company {
+    background-color: #91ff37;
+  }
+
+  .chartBtn .changeBtn {
+    width: 120px;
+    border-radius: 50px;
+    padding: 5px 20px;
+  }
+
+  .chartBtn .changeBtn.active {
+  background-color: #9384e7;
+  color: white;
+}
+
+</style>
+
+
+<div id="hoverBtn" class="chartBtn">
+  <button class="changeBtn btn01" onclick="showChart('chart1')">
+    영업팀
+  </button>
+  <button class="changeBtn btn02" onclick="showChart('chart2')">
+    영업외 팀
+  </button>
+</div>
+
+<div id="chart1" class="chart">
+  <div class="legend">
+    <div><span class="company"></span>전사 성과급</div>
+    <div><span class="team"></span>팀 성과급</div>
+    <div><span class="personal"></span>개인 성과급</div>
+    <div><span class="base"></span>기본급</div>
+  </div>
+  <div class="bar" data-values="10,10,40,40">
+    <div class="segment company"></div>
+    <div class="segment team"></div>
+    <div class="segment personal"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">1레벨</div>
+  </div>
+  <div class="bar" data-values="5,10,20,50">
+    <div class="segment company"></div>
+    <div class="segment team"></div>
+    <div class="segment personal"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">2레벨</div>
+  </div>
+  <div class="bar" data-values="5,10,15,60">
+    <div class="segment company"></div>
+    <div class="segment team"></div>
+    <div class="segment personal"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">3레벨</div>
+  </div>
+  <div class="bar" data-values="5,10,15,70">
+    <div class="segment company"></div>
+    <div class="segment team"></div>
+    <div class="segment personal"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">4레벨</div>
+  </div>
+  <div class="bar" data-values="5,10,5,80">
+    <div class="segment company"></div>
+    <div class="segment team"></div>
+    <div class="segment personal"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">5레벨</div>
+  </div>
+</div>
+
+<div id="chart2" class="chart">
+  <div class="legend">
+    <div><span class="company"></span>전사 성과급</div>
+    <div><span class="base"></span>기본급</div>
+  </div>
+  <div class="bar" data-values="20,40">
+    <div class="segment company"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">1레벨</div>
+  </div>
+  <div class="bar" data-values="15,50">
+    <div class="segment company"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">2레벨</div>
+  </div>
+  <div class="bar" data-values="10,60">
+    <div class="segment company"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">3레벨</div>
+  </div>
+  <div class="bar" data-values="10,70">
+    <div class="segment company"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">4레벨</div>
+  </div>
+  <div class="bar" data-values="10,80">
+    <div class="segment company"></div>
+    <div class="segment base"></div>
+    <div class="bar-label">5레벨</div>
+  </div>
+</div>
